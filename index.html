@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Bilal — AI Automation Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: { 900: '#060612', 800: '#0a0a1a', 700: '#0d1127', 600: '#111833', 500: '#161d3a' },
+                        neon: { blue: '#00d4ff', purple: '#8b5cf6', pink: '#c084fc' },
+                        surface: { light: '#1a1f3a', medium: '#141830', dark: '#0e1225' }
+                    },
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #060612; color: #e2e8f0; overflow-x: hidden; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #060612; }
+        ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 3px; }
+
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+        .glow-blue { box-shadow: 0 0 30px rgba(0, 212, 255, 0.15), 0 0 60px rgba(0, 212, 255, 0.05); }
+        .glow-purple { box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), 0 0 60px rgba(139, 92, 246, 0.05); }
+        .glow-text-blue { text-shadow: 0 0 40px rgba(0, 212, 255, 0.3); }
+        .glow-text-purple { text-shadow: 0 0 40px rgba(139, 92, 246, 0.3); }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(20, 24, 48, 0.7), rgba(13, 17, 39, 0.5));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 8px 40px rgba(139, 92, 246, 0.1), 0 0 80px rgba(0, 212, 255, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .gradient-border {
+            position: relative;
+            background: #0a0a1a;
+            border-radius: 16px;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 17px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(139, 92, 246, 0.3), transparent, transparent);
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(20px) rotate(-2deg); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-left {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes network-flow {
+            0% { stroke-dashoffset: 1000; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-reverse { animation: float-reverse 7s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #00d4ff);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 14px 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3), 0 4px 15px rgba(0, 212, 255, 0.2);
+        }
+        .btn-primary span { position: relative; z-index: 1; }
+
+        .btn-secondary {
+            background: transparent;
+            color: #e2e8f0;
+            font-weight: 500;
+            border-radius: 12px;
+            padding: 14px 32px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-secondary:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            background: rgba(139, 92, 246, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 14px 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        .navbar {
+            backdrop-filter: blur(20px);
+            background: rgba(6, 6, 18, 0.8);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.08);
+            transition: all 0.3s;
+        }
+        .navbar.scrolled {
+            background: rgba(6, 6, 18, 0.95);
+            border-bottom-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(0, 212, 255, 0.08));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s;
+        }
+        .glass-card:hover .service-icon {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(0, 212, 255, 0.15));
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .case-study-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-pill {
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            background: rgba(139, 92, 246, 0.06);
+            transition: all 0.3s;
+        }
+        .skill-pill:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            background: rgba(139, 92, 246, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(20, 24, 48, 0.6), rgba(13, 17, 39, 0.4));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.5s;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(139, 92, 246, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(13, 17, 39, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.08);
+            background: rgba(13, 17, 39, 0.8);
+        }
+        .form-input::placeholder { color: rgba(226, 232, 240, 0.3); }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #00d4ff);
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(6, 6, 18, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+        .mobile-menu.open { right: 0; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 90;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .shape-3d {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.08;
+        }
+        .shape-hexagon { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+        .shape-diamond { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+
+        .network-svg { position: absolute; inset: 0; pointer-events: none; opacity: 0.06; }
+        .network-line { stroke: #8b5cf6; stroke-width: 1; stroke-dasharray: 8 4; animation: network-flow 20s linear infinite; }
+
+        .photo-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(139, 92, 246, 0.3), transparent, transparent) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 200;
+            padding: 16px 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(20, 24, 48, 0.95), rgba(13, 17, 39, 0.95));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: #e2e8f0;
+            font-size: 14px;
+            font-weight: 500;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div id="toast" class="toast">
+    <div class="flex items-center gap-3">
+        <span class="iconify text-green-400" data-icon="lucide:check-circle" data-width="18"></span>
+        <span id="toast-message">Message sent successfully!</span>
+    </div>
+</div>
+
+<a href="https://wa.me/923139906478?text=Hi%20Bilal%2C%20I%27m%20interested%20in%20your%20AI%20automation%20services." target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div id="mobile-menu" class="mobile-menu">
+    <button id="close-menu" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
+        <span class="iconify" data-icon="lucide:x" data-width="28"></span>
+    </button>
+    <a href="#home" class="text-2xl font-heading font-semibold text-slate-200 hover:text-neon-blue transition-colors mobile-link">Home</a>
+    <a href="#services" class="text-2xl font-heading font-semibold text-slate-200 hover:text-neon-blue transition-colors mobile-link">Services</a>
+    <a href="#projects" class="text-2xl font-heading font-semibold text-slate-200 hover:text-neon-blue transition-colors mobile-link">Case Studies</a>
+    <a href="#about" class="text-2xl font-heading font-semibold text-slate-200 hover:text-neon-blue transition-colors mobile-link">About</a>
+    <a href="#contact" class="text-2xl font-heading font-semibold text-slate-200 hover:text-neon-blue transition-colors mobile-link">Contact</a>
+    <a href="https://wa.me/923139906478?text=Hi%20Bilal%2C%20I%27m%20interested%20in%20your%20AI%20automation%20services." target="_blank" class="btn-whatsapp text-lg flex items-center gap-3 mt-4">
+        <span class="iconify" data-icon="lucide:message-circle" data-width="20"></span>
+        WhatsApp
+    </a>
+</div>
+
+<nav id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center">
+                <span class="iconify text-white" data-icon="lucide:brain-circuit" data-width="18"></span>
+            </div>
+            <span class="font-heading font-bold text-lg text-white">Bilal</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#services" class="text-sm text-slate-400 hover:text-neon-blue transition-colors font-medium">Services</a>
+            <a href="#projects" class="text-sm text-slate-400 hover:text-neon-blue transition-colors font-medium">Case Studies</a>
+            <a href="#about" class="text-sm text-slate-400 hover:text-neon-blue transition-colors font-medium">About</a>
+            <a href="#contact" class="text-sm text-slate-400 hover:text-neon-blue transition-colors font-medium">Contact</a>
+            <a href="#contact" class="btn-primary text-sm py-2.5 px-6"><span>Book Consultation</span></a>
+        </div>
+        <button id="open-menu" class="md:hidden text-slate-400 hover:text-white transition-colors">
+            <span class="iconify" data-icon="lucide:menu" data-width="24"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="home" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <div class="hero-orb w-[500px] h-[500px] bg-neon-purple top-[-10%] right-[-10%] animate-pulse-glow"></div>
+    <div class="hero-orb w-[400px] h-[400px] bg-neon-blue bottom-[-5%] left-[-5%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+
+    <div class="shape-3d shape-hexagon w-32 h-32 bg-neon-purple top-[15%] right-[20%] animate-float hidden lg:block"></div>
+    <div class="shape-3d shape-diamond w-20 h-20 bg-neon-blue bottom-[25%] left-[15%] animate-float-reverse hidden lg:block"></div>
+    <div class="shape-3d shape-hexagon w-16 h-16 bg-neon-blue top-[40%] left-[8%] animate-float hidden lg:block" style="animation-delay: 1s;"></div>
+
+    <svg class="network-svg hidden lg:block" width="100%" height="100%">
+        <line class="network-line" x1="10%" y1="20%" x2="30%" y2="50%" style="animation-delay: 0s;"/>
+        <line class="network-line" x1="30%" y1="50%" x2="70%" y2="30%" style="animation-delay: 2s;"/>
+        <line class="network-line" x1="70%" y1="30%" x2="90%" y2="60%" style="animation-delay: 4s;"/>
+        <line class="network-line" x1="20%" y1="70%" x2="50%" y2="80%" style="animation-delay: 6s;"/>
+        <line class="network-line" x1="50%" y1="80%" x2="80%" y2="70%" style="animation-delay: 8s;"/>
+        <circle cx="10%" cy="20%" r="3" fill="#8b5cf6" opacity="0.3"/>
+        <circle cx="30%" cy="50%" r="3" fill="#00d4ff" opacity="0.3"/>
+        <circle cx="70%" cy="30%" r="3" fill="#8b5cf6" opacity="0.3"/>
+        <circle cx="90%" cy="60%" r="3" fill="#00d4ff" opacity="0.3"/>
+        <circle cx="50%" cy="80%" r="3" fill="#8b5cf6" opacity="0.3"/>
+    </svg>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neon-purple/20 bg-neon-purple/5 mb-8" style="animation: fade-in 0.8s ease-out;">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Available for Projects</span>
+                </div>
+
+                <h1 class="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.05] tracking-tight mb-6" style="animation: slide-up 0.8s ease-out 0.1s both;">
+                    Automate Your<br>
+                    <span class="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent">E-commerce</span><br>
+                    Business with AI
+                </h1>
+
+                <p class="text-lg text-slate-400 leading-relaxed max-w-lg mb-10" style="animation: slide-up 0.8s ease-out 0.2s both;">
+                    I build AI-powered systems that eliminate repetitive work, optimize operations, and help you scale faster.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 mb-12" style="animation: slide-up 0.8s ease-out 0.3s both;">
+                    <a href="#contact" class="btn-primary text-center"><span class="flex items-center justify-center gap-2">
+                        <span class="iconify" data-icon="lucide:calendar" data-width="18"></span>
+                        Book a Free Consultation
+                    </span></a>
+                    <a href="https://wa.me/923139906478?text=Hi%20Bilal%2C%20I%27m%20interested%20in%20your%20AI%20automation%20services." target="_blank" class="btn-whatsapp text-center flex items-center justify-center gap-2">
+                        <span class="iconify" data-icon="lucide:message-circle" data-width="18"></span>
+                        Contact on WhatsApp
+                    </a>
+                </div>
+
+                <div class="flex gap-8 sm:gap-12" style="animation: slide-up 0.8s ease-out 0.4s both;">
+                    <div>
+                        <div class="stat-number font-heading font-bold text-3xl">15+</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wider">Projects Delivered</div>
+                    </div>
+                    <div>
+                        <div class="stat-number font-heading font-bold text-3xl">40+</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wider">Hours Saved/Mo</div>
+                    </div>
+                    <div>
+                        <div class="stat-number font-heading font-bold text-3xl">100%</div>
+                        <div class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wider">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative hidden lg:flex justify-center items-center" style="animation: slide-left 1s ease-out 0.3s both;">
+                <div class="relative">
+                    <div class="photo-frame w-[380px] h-[460px]">
+                        <img src="https://z-cdn-media.chatglm.cn/files/41bdb129-e48e-40db-a554-e67afc28c9fa.png?auth_key=1876873933-1c991a559f0341a9a092a72722674d34-0-d6a33a81cb99d51a65349a5ba717f9d6" alt="Muhammad Bilal - AI Automation Specialist" class="w-full h-full object-cover object-top"/>
+                    </div>
+                    <div class="absolute -inset-8 bg-gradient-to-br from-neon-purple/10 via-transparent to-neon-blue/10 rounded-3xl -z-10 blur-xl"></div>
+                </div>
+
+                <div class="absolute -left-8 top-16 glass-card rounded-xl p-4 animate-float" style="animation-delay: 0.5s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+                            <span class="iconify text-green-400" data-icon="lucide:trending-up" data-width="18"></span>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">Efficiency</div>
+                            <div class="text-sm font-bold text-white">+340%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute -right-4 bottom-24 glass-card rounded-xl p-4 animate-float-reverse" style="animation-delay: 1s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-neon-purple/10 flex items-center justify-center">
+                            <span class="iconify text-neon-purple" data-icon="lucide:zap" data-width="18"></span>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">Tasks Automated</div>
+                            <div class="text-sm font-bold text-white">2,500+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute right-8 top-8 glass-card rounded-xl p-4 animate-float" style="animation-delay: 1.5s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-neon-blue/10 flex items-center justify-center">
+                            <span class="iconify text-neon-blue" data-icon="lucide:clock" data-width="18"></span>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">Hours Saved</div>
+                            <div class="text-sm font-bold text-white">40+/mo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+        <span class="text-xs text-slate-500 uppercase tracking-widest">Scroll</span>
+        <div class="w-5 h-8 border border-slate-600 rounded-full flex justify-center pt-1.5">
+            <div class="w-1 h-2 bg-slate-500 rounded-full animate-bounce"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES SECTION ===== -->
+<section id="services" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <div class="section-divider mx-auto mb-6"></div>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4">
+                What I <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Deliver</span>
+            </h2>
+            <p class="text-slate-400 text-lg">AI systems designed to remove bottlenecks, cut costs, and accelerate your e-commerce growth.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.1s;">
+                <div class="service-icon mb-6">
+                    <span class="iconify text-neon-blue" data-icon="lucide:workflow" data-width="26"></span>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">AI Workflow Automation</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-5">End-to-end automation of order processing, inventory management, and fulfillment — so your operations run without you.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-blue/8 text-neon-blue border border-neon-blue/15">Save 20+ hrs/week</span>
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-purple/8 text-neon-purple border border-neon-purple/15">Zero Manual Errors</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.2s;">
+                <div class="service-icon mb-6">
+                    <span class="iconify text-neon-purple" data-icon="lucide:headset" data-width="26"></span>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">AI Customer Support Systems</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-5">Intelligent chatbots and support automation that handle inquiries 24/7, resolve issues instantly, and escalate only when needed.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-blue/8 text-neon-blue border border-neon-blue/15">24/7 Coverage</span>
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-purple/8 text-neon-purple border border-neon-purple/15">85% Auto-Resolved</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.3s;">
+                <div class="service-icon mb-6">
+                    <span class="iconify text-neon-pink" data-icon="lucide:megaphone" data-width="26"></span>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">AI Marketing Automation</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-5">Automated email sequences, ad optimization, content generation, and customer segmentation — all driven by AI for maximum ROI.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-blue/8 text-neon-blue border border-neon-blue/15">3x More Conversions</span>
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-purple/8 text-neon-purple border border-neon-purple/15">Smart Segmentation</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.4s;">
+                <div class="service-icon mb-6">
+                    <span class="iconify text-neon-blue" data-icon="lucide:shopping-cart" data-width="26"></span>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">Custom E-commerce Web Solutions</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-5">High-performance storefronts with integrated AI features — product recommendations, dynamic pricing, and conversion optimization built in.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-blue/8 text-neon-blue border border-neon-blue/15">Fast & Responsive</span>
+                    <span class="text-xs px-3 py-1 rounded-full bg-neon-purple/8 text-neon-purple border border-neon-purple/15">AI-Powered UX</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CASE STUDIES SECTION ===== -->
+<section id="projects" class="relative py-24 lg:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface-dark/50 to-transparent pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <div class="section-divider mx-auto mb-6"></div>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4">
+                Proven <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Results</span>
+            </h2>
+            <p class="text-slate-400 text-lg">Real outcomes from real businesses. Here's what AI automation delivers.</p>
+        </div>
+
+        <div class="space-y-8">
+            <div class="glass-card rounded-2xl overflow-hidden reveal">
+                <div class="grid lg:grid-cols-5 gap-0">
+                    <div class="lg:col-span-2 relative">
+                        <img src="https://picsum.photos/seed/ecommerce-automation/600/500.jpg" alt="E-commerce Automation Case Study" class="w-full h-full object-cover min-h-[240px]"/>
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-dark-800/80 hidden lg:block"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-800/80 to-transparent lg:hidden"></div>
+                    </div>
+                    <div class="lg:col-span-3 p-8 lg:p-10">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="case-study-tag bg-neon-blue/10 text-neon-blue border border-neon-blue/20">Workflow</span>
+                            <span class="case-study-tag bg-neon-purple/10 text-neon-purple border border-neon-purple/20">E-commerce</span>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-white mb-4">Order Processing Automation for Fashion Store</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex gap-3">
+                                <span class="iconify text-red-400 mt-0.5 shrink-0" data-icon="lucide:alert-circle" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Problem:</strong> Manual order processing took 4–5 hours daily. Frequent errors led to wrong shipments and customer complaints.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="iconify text-neon-blue mt-0.5 shrink-0" data-icon="lucide:lightbulb" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Solution:</strong> Built an AI workflow that auto-syncs orders, validates data, triggers fulfillment, and sends real-time updates.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="iconify text-green-400 mt-0.5 shrink-0" data-icon="lucide:check-circle" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Result:</strong> Processing time reduced from 5 hrs to 30 min/day. Error rate dropped by 95%. Customer satisfaction up 40%.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div><span class="stat-number font-heading font-bold text-2xl">90%</span><p class="text-xs text-slate-500 mt-1">Time Saved</p></div>
+                            <div><span class="stat-number font-heading font-bold text-2xl">95%</span><p class="text-xs text-slate-500 mt-1">Fewer Errors</p></div>
+                            <div><span class="stat-number font-heading font-bold text-2xl">40%</span><p class="text-xs text-slate-500 mt-1">More Satisfaction</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden reveal" style="transition-delay: 0.15s;">
+                <div class="grid lg:grid-cols-5 gap-0">
+                    <div class="lg:col-span-2 relative lg:order-2">
+                        <img src="https://picsum.photos/seed/ai-customer-support/600/500.jpg" alt="AI Customer Support Case Study" class="w-full h-full object-cover min-h-[240px]"/>
+                        <div class="absolute inset-0 bg-gradient-to-l from-transparent to-dark-800/80 hidden lg:block"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-800/80 to-transparent lg:hidden"></div>
+                    </div>
+                    <div class="lg:col-span-3 p-8 lg:p-10 lg:order-1">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="case-study-tag bg-neon-purple/10 text-neon-purple border border-neon-purple/20">AI Support</span>
+                            <span class="case-study-tag bg-green-500/10 text-green-400 border border-green-500/20">Chatbot</span>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-white mb-4">AI-Driven Support for Electronics Brand</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex gap-3">
+                                <span class="iconify text-red-400 mt-0.5 shrink-0" data-icon="lucide:alert-circle" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Problem:</strong> Support team overwhelmed with 200+ daily queries. Response time averaged 6 hours. Losing customers.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="iconify text-neon-blue mt-0.5 shrink-0" data-icon="lucide:lightbulb" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Solution:</strong> Deployed an AI chatbot trained on product data and FAQs, with smart escalation to human agents for complex issues.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="iconify text-green-400 mt-0.5 shrink-0" data-icon="lucide:check-circle" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Result:</strong> 85% queries resolved instantly. Average response time dropped to under 30 seconds. Support costs cut by 60%.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div><span class="stat-number font-heading font-bold text-2xl">85%</span><p class="text-xs text-slate-500 mt-1">Auto-Resolved</p></div>
+                            <div><span class="stat-number font-heading font-bold text-2xl">30s</span><p class="text-xs text-slate-500 mt-1">Response Time</p></div>
+                            <div><span class="stat-number font-heading font-bold text-2xl">60%</span><p class="text-xs text-slate-500 mt-1">Cost Reduction</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden reveal" style="transition-delay: 0.3s;">
+                <div class="grid lg:grid-cols-5 gap-0">
+                    <div class="lg:col-span-2 relative">
+                        <img src="https://picsum.photos/seed/ai-marketing-ecom/600/500.jpg" alt="AI Marketing Automation Case Study" class="w-full h-full object-cover min-h-[240px]"/>
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-dark-800/80 hidden lg:block"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-800/80 to-transparent lg:hidden"></div>
+                    </div>
+                    <div class="lg:col-span-3 p-8 lg:p-10">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="case-study-tag bg-neon-pink/10 text-neon-pink border border-neon-pink/20">Marketing</span>
+                            <span class="case-study-tag bg-neon-blue/10 text-neon-blue border border-neon-blue/20">Email AI</span>
+                        </div>
+                        <h3 class="font-heading font-semibold text-xl text-white mb-4">AI Email Marketing for Beauty Brand</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex gap-3">
+                                <span class="iconify text-red-400 mt-0.5 shrink-0" data-icon="lucide:alert-circle" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Problem:</strong> Generic email campaigns had 2% open rates. No personalization. High unsubscribe rates. Wasted ad spend.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="iconify text-neon-blue mt-0.5 shrink-0" data-icon="lucide:lightbulb" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Solution:</strong> AI-powered segmentation, personalized email generation, send-time optimization, and automated A/B testing.</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <span class="iconify text-green-400 mt-0.5 shrink-0" data-icon="lucide:check-circle" data-width="16"></span>
+                                <p class="text-sm text-slate-400"><strong class="text-slate-300">Result:</strong> Open rates jumped to 38%. Revenue from email increased 220%. Unsubscribe rate dropped 70%.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div><span class="stat-number font-heading font-bold text-2xl">38%</span><p class="text-xs text-slate-500 mt-1">Open Rate</p></div>
+                            <div><span class="stat-number font-heading font-bold text-2xl">220%</span><p class="text-xs text-slate-500 mt-1">Revenue Growth</p></div>
+                            <div><span class="stat-number font-heading font-bold text-2xl">70%</span><p class="text-xs text-slate-500 mt-1">Less Unsubscribes</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about" class="relative py-24 lg:py-32 overflow-hidden">
+    <div class="hero-orb w-[300px] h-[300px] bg-neon-blue top-[20%] left-[-5%] animate-pulse-glow" style="animation-delay: 1s;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal-left">
+                <div class="relative">
+                    <div class="photo-frame w-full max-w-md mx-auto aspect-[4/5]">
+                        <img src="https://z-cdn-media.chatglm.cn/files/41bdb129-e48e-40db-a554-e67afc28c9fa.png?auth_key=1876873933-1c991a559f0341a9a092a72722674d34-0-d6a33a81cb99d51a65349a5ba717f9d6" alt="Muhammad Bilal" class="w-full h-full object-cover object-top"/>
+                    </div>
+                    <div class="absolute -inset-6 bg-gradient-to-br from-neon-purple/8 via-transparent to-neon-blue/8 rounded-3xl -z-10 blur-2xl"></div>
+
+                    <div class="absolute -bottom-4 -right-4 lg:right-auto lg:-left-4 glass-card rounded-xl p-5 glow-purple">
+                        <div class="text-center">
+                            <div class="stat-number font-heading font-bold text-3xl">1+</div>
+                            <div class="text-xs text-slate-400 mt-1 font-medium">Years Teaching<br>Computer Science</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal-right">
+                <div class="section-divider mb-6"></div>
+                <h2 class="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6">
+                    The Person Behind<br>
+                    <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">the Systems</span>
+                </h2>
+
+                <div class="space-y-4 text-slate-400 leading-relaxed mb-8">
+                    <p>
+                        I'm <strong class="text-white">Muhammad Bilal</strong> — an AI Automation Specialist based in Afghanistan, working with e-commerce brands worldwide to replace manual operations with intelligent, AI-driven systems.
+                    </p>
+                    <p>
+                        With a background in Computer Science and hands-on experience as a university-level teacher, I bring deep technical understanding and clear communication to every project. I don't just build automations — I architect systems that think, adapt, and scale.
+                    </p>
+                    <p>
+                        My expertise spans <strong class="text-white">Generative AI</strong>, <strong class="text-white">Agentic AI</strong>, and <strong class="text-white">frontend development</strong> — a combination that lets me deliver end-to-end solutions, from intelligent backend workflows to polished user interfaces.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3">
+                        <span class="iconify text-neon-blue mt-1 shrink-0" data-icon="lucide:check" data-width="18"></span>
+                        <span class="text-sm text-slate-300">Computer Science Educator</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="iconify text-neon-blue mt-1 shrink-0" data-icon="lucide:check" data-width="18"></span>
+                        <span class="text-sm text-slate-300">Frontend Developer</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="iconify text-neon-blue mt-1 shrink-0" data-icon="lucide:check" data-width="18"></span>
+                        <span class="text-sm text-slate-300">Generative AI Specialist</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="iconify text-neon-blue mt-1 shrink-0" data-icon="lucide:check" data-width="18"></span>
+                        <span class="text-sm text-slate-300">Agentic AI Builder</span>
+                    </div>
+                </div>
+
+                <a href="#contact" class="btn-primary inline-flex"><span class="flex items-center gap-2">
+                    Let's Work Together
+                    <span class="iconify" data-icon="lucide:arrow-right" data-width="18"></span>
+                </span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SKILLS SECTION ===== -->
+<section id="skills" class="relative py-24 lg:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface-dark/30 to-transparent pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <div class="section-divider mx-auto mb-6"></div>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4">
+                Technical <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Arsenal</span>
+            </h2>
+            <p class="text-slate-400 text-lg">The tools and technologies I use to build systems that deliver results.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.1s;">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-neon-purple/10 flex items-center justify-center">
+                        <span class="iconify text-neon-purple" data-icon="lucide:brain" data-width="20"></span>
+                    </div>
+                    <h3 class="font-heading font-semibold text-white">AI & Automation</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-pill">Generative AI</span>
+                    <span class="skill-pill">Agentic AI</span>
+                    <span class="skill-pill">Workflow Automation</span>
+                    <span class="skill-pill">NLP Systems</span>
+                    <span class="skill-pill">Prompt Engineering</span>
+                    <span class="skill-pill">AI Integrations</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.2s;">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-neon-blue/10 flex items-center justify-center">
+                        <span class="iconify text-neon-blue" data-icon="lucide:code-2" data-width="20"></span>
+                    </div>
+                    <h3 class="font-heading font-semibold text-white">Development</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-pill">HTML5</span>
+                    <span class="skill-pill">CSS3</span>
+                    <span class="skill-pill">JavaScript</span>
+                    <span class="skill-pill">Frontend Dev</span>
+                    <span class="skill-pill">Responsive Design</span>
+                    <span class="skill-pill">UI/UX</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 reveal" style="transition-delay: 0.3s;">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-neon-pink/10 flex items-center justify-center">
+                        <span class="iconify text-neon-pink" data-icon="lucide:wrench" data-width="20"></span>
+                    </div>
+                    <h3 class="font-heading font-semibold text-white">Tools & Platforms</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-pill">ChatGPT</span>
+                    <span class="skill-pill">Streamlit</span>
+                    <span class="skill-pill">Modern AI Tools</span>
+                    <span class="skill-pill">API Integration</span>
+                    <span class="skill-pill">Zapier / Make</span>
+                    <span class="skill-pill">No-Code AI</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS SECTION ===== -->
+<section id="testimonials" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <div class="section-divider mx-auto mb-6"></div>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4">
+                Client <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Feedback</span>
+            </h2>
+            <p class="text-slate-400 text-lg">What business owners say after working with me.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                <div class="flex gap-1 mb-4">
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">"Bilal completely transformed how we handle orders. What used to take our team 5 hours now happens in minutes. The AI system he built is flawless — zero errors in 3 months. Absolutely worth every penny."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center text-white font-bold text-sm">AK</div>
+                    <div>
+                        <div class="text-sm font-semibold text-white">Ahmad K.</div>
+                        <div class="text-xs text-slate-500">Fashion E-commerce, UAE</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                <div class="flex gap-1 mb-4">
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">"We were drowning in customer queries. Bilal set up an AI support system that handles 85% of them automatically. Our response time went from hours to seconds. Our customers are happier, and our support costs are way down."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center text-white font-bold text-sm">SR</div>
+                    <div>
+                        <div class="text-sm font-semibold text-white">Sarah R.</div>
+                        <div class="text-xs text-slate-500">Electronics Brand, USA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card reveal" style="transition-delay: 0.3s;">
+                <div class="flex gap-1 mb-4">
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                    <span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">"Bilal doesn't just automate — he thinks strategically about your business. His email AI system tripled our revenue from email campaigns. He explains complex AI concepts in a way that makes sense. Highly recommend."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-pink flex items-center justify-center text-white font-bold text-sm">MH</div>
+                    <div>
+                        <div class="text-sm font-semibold text-white">Maria H.</div>
+                        <div class="text-xs text-slate-500">Beauty Brand, UK</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="relative py-24 lg:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-surface-dark/50 to-transparent pointer-events-none"></div>
+    <div class="hero-orb w-[400px] h-[400px] bg-neon-purple bottom-[-10%] right-[-5%] animate-pulse-glow" style="animation-delay: 3s;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+            <div class="section-divider mx-auto mb-6"></div>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4">
+                Let's <span class="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Automate</span> Your Business
+            </h2>
+            <p class="text-slate-400 text-lg">Let's automate your business and save you hours every week.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-10">
+            <div class="lg:col-span-2 space-y-6 reveal-left">
+                <a href="https://wa.me/923139906478?text=Hi%20Bilal%2C%20I%27m%20interested%20in%20your%20AI%20automation%20services." target="_blank" class="glass-card rounded-2xl p-6 flex items-center gap-5 block hover:!border-green-500/30 group">
+                    <div class="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center shrink-0 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:message-circle" data-width="24"></span>
+                    </div>
+                    <div>
+                        <div class="text-sm text-slate-500 mb-1">WhatsApp (Primary)</div>
+                        <div class="text-white font-semibold">+92 313 9906478</div>
+                        <div class="text-xs text-green-400 mt-1">Usually replies within 1 hour</div>
+                    </div>
+                </a>
+
+                <a href="mailto:xvenum18@gmail.com" class="glass-card rounded-2xl p-6 flex items-center gap-5 block hover:!border-neon-blue/30 group">
+                    <div class="w-14 h-14 rounded-xl bg-neon-blue/10 flex items-center justify-center shrink-0 group-hover:bg-neon-blue/20 transition-colors">
+                        <span class="iconify text-neon-blue" data-icon="lucide:mail" data-width="24"></span>
+                    </div>
+                    <div>
+                        <div class="text-sm text-slate-500 mb-1">Email</div>
+                        <div class="text-white font-semibold">xvenum18@gmail.com</div>
+                        <div class="text-xs text-slate-400 mt-1">For detailed inquiries</div>
+                    </div>
+                </a>
+
+                <div class="glass-card rounded-2xl p-6">
+                    <h4 class="font-heading font-semibold text-white mb-4">How It Works</h4>
+                    <div class="space-y-4">
+                        <div class="flex gap-3">
+                            <div class="w-7 h-7 rounded-full bg-neon-purple/15 flex items-center justify-center shrink-0 mt-0.5">
+                                <span class="text-xs font-bold text-neon-purple">1</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-white">Free Consultation</div>
+                                <div class="text-xs text-slate-500">We discuss your bottlenecks</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="w-7 h-7 rounded-full bg-neon-purple/15 flex items-center justify-center shrink-0 mt-0.5">
+                                <span class="text-xs font-bold text-neon-purple">2</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-white">Custom Strategy</div>
+                                <div class="text-xs text-slate-500">I design your AI automation plan</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="w-7 h-7 rounded-full bg-neon-purple/15 flex items-center justify-center shrink-0 mt-0.5">
+                                <span class="text-xs font-bold text-neon-purple">3</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-white">Build & Deploy</div>
+                                <div class="text-xs text-slate-500">I build, test, and launch your systems</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="w-7 h-7 rounded-full bg-green-500/15 flex items-center justify-center shrink-0 mt-0.5">
+                                <span class="text-xs font-bold text-green-400">4</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-white">Scale & Optimize</div>
+                                <div class="text-xs text-slate-500">Continuous improvement & support</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 reveal-right">
+                <div class="glass-card rounded-2xl p-8 lg:p-10">
+                    <h3 class="font-heading font-semibold text-xl text-white mb-2">Send an Inquiry</h3>
+                    <p class="text-sm text-slate-500 mb-8">Tell me about your business and what you'd like to automate.</p>
+
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Your Name</label>
+                                <input type="text" name="name" placeholder="John Smith" class="form-input" required/>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email Address</label>
+                                <input type="email" name="email" placeholder="john@store.com" class="form-input" required/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Business Type</label>
+                            <select name="business" class="form-input cursor-pointer" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><polyline points=%226 9 12 15 18 9%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
+                                <option value="" style="background: #0d1127;">Select your business type</option>
+                                <option value="fashion" style="background: #0d1127;">Fashion & Apparel</option>
+                                <option value="electronics" style="background: #0d1127;">Electronics</option>
+                                <option value="beauty" style="background: #0d1127;">Beauty & Cosmetics</option>
+                                <option value="food" style="background: #0d1127;">Food & Beverages</option>
+                                <option value="other" style="background: #0d1127;">Other E-commerce</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">What do you want to automate?</label>
+                            <textarea name="message" rows="4" placeholder="Tell me about your current challenges, what tasks take the most time, and what results you're looking for..." class="form-input resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full text-center py-4">
+                            <span class="flex items-center justify-center gap-2">
+                                <span class="iconify" data-icon="lucide:send" data-width="18"></span>
+                                Send Inquiry
+                            </span>
+                        </button>
+                        <p class="text-xs text-slate-600 text-center">Free consultation • No obligation • Response within 24 hours</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="relative border-t border-white/5 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center">
+                    <span class="iconify text-white" data-icon="lucide:brain-circuit" data-width="18"></span>
+                </div>
+                <span class="font-heading font-bold text-lg text-white">Muhammad Bilal</span>
+            </div>
+            <p class="text-sm text-slate-600">© 2025 Muhammad Bilal. AI Automation Specialist.</p>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/923139906478" target="_blank" class="text-slate-500 hover:text-green-400 transition-colors">
+                    <span class="iconify" data-icon="lucide:message-circle" data-width="20"></span>
+                </a>
+                <a href="mailto:xvenum18@gmail.com" class="text-slate-500 hover:text-neon-blue transition-colors">
+                    <span class="iconify" data-icon="lucide:mail" data-width="20"></span>
+                </a>
+                <a href="#" class="text-slate-500 hover:text-neon-purple transition-colors">
+                    <span class="iconify" data-icon="lucide:linkedin" data-width="20"></span>
+                </a>
+                <a href="#" class="text-slate-500 hover:text-neon-purple transition-colors">
+                    <span class="iconify" data-icon="lucide:github" data-width="20"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+document.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+class Particle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.3 + 0.1;
+        this.color = Math.random() > 0.5 ? '139, 92, 246' : '0, 212, 255';
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+        if (mouse.x !== null) {
+            const dx = mouse.x - this.x, dy = mouse.y - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) { this.x -= dx * 0.005; this.y -= dy * 0.005; }
+        }
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+const particleCount = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 15000));
+for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(139, 92, 246, ${0.06 * (1 - dist / 120)})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+const mobileMenu = document.getElementById('mobile-menu');
+document.getElementById('open-menu').addEventListener('click', () => mobileMenu.classList.add('open'));
+document.getElementById('close-menu').addEventListener('click', () => mobileMenu.classList.remove('open'));
+document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+});
+
+const contactForm = document.getElementById('contact-form');
+const toast = document.getElementById('toast');
+const toastMessage = document.getElementById('toast-message');
+
+function showToast(message, isError = false) {
+    toastMessage.textContent = message;
+    toast.style.borderColor = isError ? 'rgba(239, 68, 68, 0.3)' : 'rgba(37, 211, 102, 0.3)';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const message = this.message.value.trim();
+    if (!name || !email || !message) { showToast('Please fill in all required fields.', true); return; }
+    const waMessage = `Hi Bilal, I'm ${name} (${email}).${this.business.value ? ` Business: ${this.business.options[this.business.selectedIndex].text}.` : ''}\n\n${message}`;
+    showToast('Inquiry sent! Redirecting to WhatsApp for faster response...');
+    setTimeout(() => { window.open(`https://wa.me/923139906478?text=${encodeURIComponent(waMessage)}`, '_blank'); }, 1500);
+    this.reset();
+});
+
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 120) current = section.getAttribute('id');
+    });
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+        link.classList.toggle('!text-neon-blue', link.getAttribute('href') === `#${current}`);
+    });
+});
+</script>
+
+</body>
+</html>
